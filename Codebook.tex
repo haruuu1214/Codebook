@@ -1,0 +1,46 @@
+\documentclass[a4paper,10pt,oneside]{article}
+
+\input{Codebook-setup}
+
+\begin{document}
+
+  % Debug Info
+  % \the\paperwidth  \par
+  % \the\paperheight  \par
+  % \the\geometrylen{layoutwidth}  \par
+  % \the\geometrylen{layoutheight}  \par
+  % \the\textwidth  \par
+  % \the\textheight  \par
+  % \the\voffset  \par
+  % \the\hoffset  \par
+
+  \begin{multicols}{\NumberOfColumn}
+    \enlargethispage*{\baselineskip}
+    \begin{center}
+      \Huge\textsc{Codebook}
+      \vspace{0.35cm}
+    \end{center}
+    \tableofcontents
+  \end{multicols}
+  \clearpage
+
+  \newpage
+
+  \begin{multicols}{\NumberOfColumn}
+    \pagestyle{fancy}
+
+    \fancyfoot{}
+    \fancyhead[L]{\UniversityName{} - \TeamName}
+    \fancyhead[R]{\thepage}
+
+    \renewcommand{\headrulewidth}{0.4pt}
+    \renewcommand{\contentsname}{Contents}
+
+    \scriptsize
+    \input{list.tex}
+    \clearpage
+  \end{multicols}
+  
+  
+
+\end{document}
