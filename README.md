@@ -1,4 +1,4 @@
-# CodeBook
+# Codebook
 
 forked from [https://github.com/Jinkela-Xiao-Zuan-Feng-Mountaineer/Codebook.git]()
 
@@ -7,7 +7,7 @@ forked from [https://github.com/Jinkela-Xiao-Zuan-Feng-Mountaineer/Codebook.git]
 進去該資料夾
 
 ```
-cd CodeBook
+cd Codebook
 ```
 
 開啟 docker，再執行以下動作：
