@@ -5,7 +5,7 @@ struct DSU {
         parent.resize(n + 1);
         size.resize(n + 1, 1);
         tag.resize(n + 1, 0);
-        for (int i = 1; i <= n; i++) parent[i] = i;
+        iota(all(parent), 0);
 	}
 	int find(int x) {
         if (parent[x] == x) return x;
