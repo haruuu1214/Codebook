@@ -1,0 +1,113 @@
+% **************************************************
+% Packages
+% **************************************************
+\usepackage{amsmath}            % math typesetting
+\usepackage{amssymb}            % extra math symbols
+\usepackage{amsthm}             % theorem / definition environments
+\usepackage{fontspec}           % font selection (XeLaTeX)
+\usepackage{xeCJK}              % CJK font support
+\usepackage{geometry}           % page layout
+\usepackage[x11names]{xcolor}   % colors (also provides the color package)
+\usepackage{listings}           % source code listings
+\usepackage{fancyhdr}           % header and footer
+\usepackage{graphicx}           % graphics
+\usepackage{ifthen}             % conditionals
+\usepackage{enumerate}
+\usepackage{titlesec}
+\usepackage{pdfpages}
+\usepackage{multicol}           % multi-column layout
+
+% **************************************************
+% Configuration
+% **************************************************
+\newboolean{UsingGeometryLandscape}
+\setboolean{UsingGeometryLandscape}{false}                % use landscape pages
+\newcommand{\NumberOfColumn}{2}                            % columns per page
+\newcommand{\UniversityName}{National Cheng Kung University} % university name
+\newcommand{\TeamName}{NightCodingKnightUnited}            % team name
+
+% **************************************************
+% Commands for Including Source Files
+% (used by the list.tex generated from build.py)
+% **************************************************
+% \includecpp{title}{path}: C++ (.cpp)
+\newcommand{\includecpp}[2]{%
+  \subsection{#1}
+  \lstinputlisting[language=C++]{#2}
+}
+
+% \includepy{title}{path}: Python (.py)
+\newcommand{\includepy}[2]{%
+  \subsection{#1}
+  \lstinputlisting[language=python]{#2}
+}
+
+% \includetex{title}{path}: LaTeX (.tex)
+\newcommand{\includetex}[2]{%
+  \subsection{#1}
+  \input{#2}
+}
+
+% Debug helper: \geometrylen{name} gives geometry's internal length \Gm@name
+\newcommand{\geometrylen}[1]{\csname Gm@#1\endcsname}
+
+% **************************************************
+% Page Layout
+% **************************************************
+\ifthenelse{\boolean{UsingGeometryLandscape}}{\geometry{landscape}}{}
+\geometry{
+  left=30pt,
+  top=50pt,
+}
+\setlength{\textheight}{\paperheight-67pt}
+\setlength{\textwidth}{\paperwidth-45pt}
+\setlength{\columnsep}{15pt}    % gap between columns
+\setlength{\columnseprule}{0pt} % no rule between columns
+
+% **************************************************
+% Fonts
+% **************************************************
+\setromanfont[Path=fonts/]{times new roman.ttf}[
+  BoldFont = times new roman bold.ttf,
+]
+\setmonofont[Path=fonts/]{consola.ttf}[
+  BoldFont = consolab.ttf,
+  ItalicFont = consolai.ttf,
+]
+\setCJKmainfont[Path=fonts/]{msjh.ttc} % CJK main font
+\setCJKmonofont[Path=fonts/]{msjh.ttc} % CJK monospaced font
+\XeTeXlinebreaklocale "zh"             % allow line breaks between CJK characters
+\XeTeXlinebreakskip = 0pt plus 1pt     % inter-character glue for CJK line breaking
+
+\setcounter{secnumdepth}{3} % number sections down to subsubsection
+
+% **************************************************
+% Listing Format
+% **************************************************
+% Render '-' in listings as a plain hyphen-minus (so copied code stays valid)
+\makeatletter
+\lst@CCPutMacro\lst@ProcessOther {"2D}{\lst@ttfamily{-{}}{-{}}}
+\@empty\z@\@empty
+\makeatother
+
+\lstset{
+  basicstyle=\scriptsize\ttfamily,  % font size and family of the code
+  numbers=left,                     % position of line numbers
+  numberstyle=\tiny,                % font size of line numbers
+  stepnumber=1,                     % number every line
+  numbersep=5pt,                    % distance between line numbers and code
+  backgroundcolor=\color{white},    % background color
+  showspaces=false,                 % do not mark spaces
+  showstringspaces=false,           % do not mark spaces inside strings
+  showtabs=false,                   % do not mark tabs
+  frame=false,                      % no frame around the code
+  tabsize=2,                        % tab width in spaces
+  captionpos=b,                     % caption at the bottom
+  breaklines=true,                  % wrap long lines
+  breakatwhitespace=false,          % allow breaks anywhere, not only at whitespace
+  escapeinside={\%*}{*)},           % escape to LaTeX inside %* ... *)
+  morekeywords={*},                 % extra keywords
+  keywordstyle=\bfseries\color{Blue1},
+  commentstyle=\itshape\color{Red4},
+  stringstyle=\itshape\color{Green4},
+}
