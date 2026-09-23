@@ -4,11 +4,11 @@ void calculate_Z(string &s) {
 	Z.resize(s.size(), 0);
 	int l = 0, r = 0;
 	for (int i = 1; i < s.size(); i++) {
-		if (i <= r) // 估算下界
+		if (i <= r)
 			Z[i] = min(Z[i - l], r - i + 1);
-		while (i + Z[i] < s.size() && s[i + Z[i]] == s[Z[i]]) // 暴力檢查 Z(i) 是否可以變更大
+		while (i + Z[i] < s.size() && s[i + Z[i]] == s[Z[i]])
 			Z[i]++;
-		if (i + Z[i] - 1 > r) { // 更新 "看到最右邊的區間 [l, r]"
+		if (i + Z[i] - 1 > r) {
 			l = i; r = i + Z[i] - 1;
 		}
 	}

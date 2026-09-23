@@ -1,6 +1,6 @@
 using i64 = long long;
 using i128 = __int128_t;
-struct Factorize { // 質因數分解
+struct Factorize { // 質因數分解 N <= 
 	i64 fmul(i64 a, i64 b, i64 p) {
 		return (i128)a * b % p;
 	}
@@ -12,7 +12,7 @@ struct Factorize { // 質因數分解
 	}
 	bool check(i64 a, i64 u, i64 n, int t) {
 		a = fpow(a, u, n);
-		if (a == 0 or a == 1 or a == n - 1) 
+		if (a == 0 || a == 1 || a == n - 1) 
 			return true;
 		for (int i = 0; i < t; i++) {
 			a = fmul(a, a, n);
@@ -42,7 +42,7 @@ struct Factorize { // 質因數分解
 			x = f(x, n, p);
 			y = f(f(y, n, p), n, p);
 			d = gcd(abs(x - y), n);
-			if (d != n and d != 1) return d;
+			if (d != n && d != 1) return d;
 			if (d == n) ++p;
 		}
 	}

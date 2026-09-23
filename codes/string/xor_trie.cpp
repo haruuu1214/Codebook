@@ -19,7 +19,7 @@ struct Trie {
 			}
 		}
 	}
-	int query(int x) { // query MAX XOR with number x
+	int query(int x) { // query max xor with number x
 		node* now = root;
 		int mx = 0;
 		for (int i = 30; i >= 0; i--) {

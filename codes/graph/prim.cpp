@@ -1,5 +1,5 @@
 const int N = 2005;
-int dis[N][N]; // input
+int dis[N][N];
 int distfromtree[N];
 for (int i = 1; i <= n; i++)
 	distfromtree[i] = dis[1][i];

@@ -14,7 +14,7 @@ pair<bool, pair<int, int>> CRT(int a1, int m1, int a2, int m2) {
 		return {0, {-1, -1}};
 	int x, y;
 	extgcd(m1, m2, x, y);
-	x = (a2 - a1) * x / g;  // 兩者不能相反
+	x = (a2 - a1) * x / g; // 兩者不能相反
 	a1 = x * m1 + a1;
 	m1 = m1 * m2 / g;
 	a1 = (a1 % m1 + m1) % m1;

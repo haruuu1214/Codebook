@@ -1,4 +1,3 @@
-using namespace std;
 // Count the number of primes not greater than N (N <= 10^11)
 int primeCount(const int n) {
 	if (n <= 1) { return 0; }

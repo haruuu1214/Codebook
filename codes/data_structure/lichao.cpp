@@ -52,4 +52,3 @@ struct Lee_Chao {
 	void update(line l) { update(root, 1, N, l); }
 	int query(int x) { return query(root, 1, N, x); }
 };
-// Lee_Chao S;

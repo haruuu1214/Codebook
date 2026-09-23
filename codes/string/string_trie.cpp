@@ -18,7 +18,8 @@ struct Trie {
 		}
 		now->set_end();
 	}
-	bool query(string s) {  // return if there is a word of the given string
+    // return if there is a word of the given string
+	bool query(string s) {
 		node* now = root;
 		for (int i = 0; i < (int)s.size(); i++) {
 			if (!now->contain_key(s[i])) return false;

@@ -1,5 +1,5 @@
 const int N = 100005;
-vector <int> G[N];
+vector<int> G[N];
 struct HLD {
 	vector<int> pa, sz, depth, mxson, topf, id;
 	int n, idcnt = 0;
@@ -23,15 +23,13 @@ struct HLD {
 			dfs2(u, u);
 		}
 	}
-	// query 為區間資料結構
 	int path_query(int a, int b) {
 		int res = 0;
-		while (topf[a] != topf[b]) { // 若不在同一條鍊上
+		while (topf[a] != topf[b]) {
 			if (depth[topf[a]] < depth[topf[b]]) swap(a, b);
 			res = max(res, query(id[topf[a]], id[a])); // query : l = id[topf[a]], r = id[a]
 			a = pa[topf[a]];
 		}
-		// 此時已在同一條鍊上
 		if (depth[a] < depth[b]) swap(a, b);
 		res = max(res, query(id[b], id[a])); // query : l = id[b], r = id[a]
 		return res;

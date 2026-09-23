@@ -1,4 +1,3 @@
-// CSES Forest Queries II TLE
 struct Node2 {
 	int val; Node2 *lc, *rc;
 	Node2 () {
@@ -64,41 +63,4 @@ int query1(Node1 *n1, int l, int r, int qxl, int qxr, int qyl, int qyr) {
 		return query1(n1->rc, mid + 1, r, qxl, qxr, qyl, qyr);
 	else
 		return query1(n1->lc, l, mid, qxl, qxr, qyl, qyr) + query1(n1->rc, mid + 1, r, qxl, qxr, qyl, qyr);
-}
-bool b[N + 5][N + 5];
-signed main() {
-	Node1 *root = new Node1();
-	int n, q;
-	cin >> n >> q;
-	N = n;
-	char ch;
-	for (int i = 1; i <= n; i++) {
-		for (int j = 1; j <= n; j++) {
-			cin >> ch;
-			if (ch == '*') {
-				b[i][j] = 1;
-				update1(root, 1, N, i, j, 1);
-			} else
-				b[i][j] = 0;
-		}
-	}
-	int p;
-	int x, y, xl, xr, yl, yr;
-	while (q--) {
-		cin >> p;
-		if (p == 1) {
-			cin >> x >> y;
-			if (b[x][y]) {
-				b[x][y] = 0;
-				update1(root, 1, N, x, y, -1);
-			} else {
-				b[x][y] = 1;
-				update1(root, 1, N, x, y, +1);
-			}
-		} else {
-			cin >> xl >> yl >> xr >> yr;
-			cout << query1(root, 1, N, xl, xr, yl, yr) << "\n";
-		}
-	}
-	return 0;
 }

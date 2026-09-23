@@ -85,14 +85,3 @@ string div(string a, string b) {
 	}
 	return res;
 }
-signed main() {
-	string x, y, ch;
-	cin >> x >> ch >> y;
-	string ans;
-	if (ch[0] == '+') ans = add(x, y);
-	else if (ch[0] == '-') ans = sub(x, y);
-	else if (ch[0] == '*') ans = mul(x, y);
-	else ans = div(x, y);
-	cout << ans << "\n";
-	return 0;
-}
