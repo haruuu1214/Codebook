@@ -18,6 +18,6 @@ vector<int> phi_1_to_n(int n) {
 	for (int i = 2; i <= n; i++) phi[i] = i - 1;
 	for (int i = 2; i <= n; i++)
 		for (int j = 2 * i; j <= n; j += i) // 枚舉所有倍數
-				phi[j] -= phi[i];
+			phi[j] -= phi[i];
 	return phi;
 }
