@@ -1,6 +1,6 @@
 using i64 = long long;
 using i128 = __int128_t;
-struct Factorize { // 質因數分解 N <= 
+struct Factorize { // 質因數分解 N <= 10^18
 	i64 fmul(i64 a, i64 b, i64 p) {
 		return (i128)a * b % p;
 	}

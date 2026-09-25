@@ -1,0 +1,154 @@
+{\Large Dinic}
+\medskip
+\setlength{\parindent}{2em}
+
+{\large\bfseries 基本建邊\par}
+\medskip
+\begin{itemize}
+  \item 有向邊 $u \to v$，容量 $c$：\texttt{add(u, v, c)}，反向邊容量為 $0$。
+  \item 無向邊 $u - v$，容量 $c$：\texttt{add(u, v, c)}，並把反向邊容量也設為 $c$，不需另外再加一條邊。
+  \item 多源點或多匯點：開超級源 $S$，連 $S \to$ 每個源點（$\infty$）；開超級匯 $T$，連每個匯點 $\to T$（$\infty$）。
+  \item 點有容量 $c$：拆點為 $v_{in} \to v_{out}$（$c$），進入的邊接到 $v_{in}$，出去的邊從 $v_{out}$ 出發。
+\end{itemize}
+
+{\large\bfseries 匹配與分配\par}
+
+\medskip
+
+\begin{itemize}
+  \item 二分圖匹配：$S \to L$（$1$）、$L \to R$（$1$）、$R \to T$（$1$），最大流即最大匹配數。
+  \item 每個點最多配 $k$ 個：把 $S$ 側或 $T$ 側的邊容量改為 $k$。
+  \item 同一對物品只能配一次：中間的邊容量設為 $1$。
+  \item 多對多分配：$S \to$ 人（可做件數）、人 $\to$ 工作（$1$ 或上限）、工作 $\to T$（需求量）；是否可行看是否滿流。
+\end{itemize}
+
+{\large\bfseries 最小割模型\par}
+
+\medskip
+
+\begin{itemize}
+  \item 題目出現「代價」「二選一」「放棄」等字眼時，考慮最小割。
+  \item 某條邊不能被割：容量設為 $\infty$。
+  \item 最大權閉合子圖（選 $i$ 就必須選 $j$）：
+  \begin{itemize}
+    \item 收益 $p > 0$：$S \to i$（$p$）
+    \item 花費 $c$：$i \to T$（$c$）
+    \item 依賴關係：$i \to j$（$\infty$）
+    \item 答案 $=$ 正收益總和 $-$ 最大流
+  \end{itemize}
+  \item 二選一（每點選 $A$ 或 $B$，相鄰兩點選得不同要付罰金 $w$）：
+  \begin{itemize}
+    \item 規定點在 $S$ 側代表選 $A$，在 $T$ 側代表選 $B$。
+    \item $S \to i$（選 $B$ 的代價）、$i \to T$（選 $A$ 的代價）
+    \item 兩點選得不同的罰金：$i \to j$（$w$）與 $j \to i$（$w$）
+    \item 答案 $=$ 最小割
+  \end{itemize}
+  \item 強制某點一定選 $A$ 或一定選 $B$：$S \to i$（$\infty$）或 $i \to T$（$\infty$）。
+  \item 網格或棋盤類：先黑白染色成二分圖。
+  \begin{itemize}
+    \item 最小點覆蓋 $=$ 最大匹配
+    \item 最大獨立集 $=$ 總點數 $-$ 最大匹配
+  \end{itemize}
+\end{itemize}
+
+{\large\bfseries 路徑類\par}
+\medskip
+\begin{itemize}
+  \item 邊不相交的路徑數：每條邊容量 $1$，直接跑最大流。
+  \item 點不相交的路徑數：拆點，$v_{in} \to v_{out}$（$1$）。
+  \item DAG 最小路徑覆蓋：
+  \begin{itemize}
+    \item 每點拆成出點與入點：$S \to u_{out}$（$1$）、$u_{in} \to T$（$1$）
+    \item 原圖的邊 $u \to v$：$u_{out} \to v_{in}$（$1$）
+    \item 答案 $= n -$ 最大流
+    \item 若路徑可重複經過點，先做遞移閉包再建圖。
+  \end{itemize}
+  \item 與時間有關（每單位時間走一步、各時刻容量不同）：建分層圖，把每個點依時間複製成 $(v, t)$，邊從第 $t$ 層連到第 $t+1$ 層。
+\end{itemize}
+
+{\large\bfseries 有上下界的流（邊 $u \to v$ 的流量需在 $[l, r]$ 內）\par}
+\medskip
+\begin{itemize}
+  \item 建 $u \to v$（$r - l$），並記錄 $in[v] \mathrel{+}= l$、$out[u] \mathrel{+}= l$。
+  \item 另開源匯 $S'$、$T'$：
+  \begin{itemize}
+    \item 若 $in[x] - out[x] > 0$：$S' \to x$（差值）
+    \item 若差值 $< 0$：$x \to T'$（$-$差值）
+  \end{itemize}
+  \item 若題目本身有源匯 $s, t$，再加 $t \to s$（$\infty$）。
+  \item 從 $S'$ 到 $T'$ 跑滿流才代表有可行解。
+  \item 求最大流：接著在殘量網路上跑 $s \to t$。
+  \item 求最小流：接著在殘量網路上跑 $t \to s$，再用原流量減去。
+\end{itemize}
+
+\setlength{\parindent}{0em}
+
+{\Large MCMF}
+\medskip
+
+\setlength{\parindent}{2em}
+
+{\large\bfseries 基本建邊\par}
+\medskip
+\begin{itemize}
+    \item 每條邊為 \texttt{add(u, v, cap, cost)}，反向邊容量 $0$、費用 $-cost$。
+\end{itemize}
+
+{\large\bfseries 常見情境\par}
+\medskip
+\begin{itemize}
+  \item 帶權二分匹配（指派問題）：$S \to L$（$1, 0$）、$L \to R$（$1, w$）、$R \to T$（$1, 0$）。
+  \item 求最大收益：費用取負 $cost = -w$，最後答案再取負。
+  \item 只求收益最大、不要求流量最大：
+  \begin{itemize}
+    \item 做法一：增廣時一旦最短路費用 $\ge 0$ 就停止。
+    \item 做法二：每個點加一條 $\to T$（$1, 0$）的邊，讓它可以選擇不配。
+  \end{itemize}
+  \item 指定總流量為 $F$：開新源 $S_0$，連 $S_0 \to S$（$F, 0$）。
+  \item 點有費用或收益：拆點 $v_{in} \to v_{out}$（容量, 費用）；例如每點只能拿一次收益 $p$，建（$1, -p$）。
+  \item 點可經過多次，但收益只能拿一次：拆點並放兩條平行邊（$1, -p$）與（$\infty, 0$）。
+  \item 邊際成本遞增（例如費用為 $x^2$）：拆成多條容量 $1$ 的平行邊，費用依序為 $1, 3, 5, \dots$（即 $x^2$ 的差分）。前提是費用為凸，一條比一條貴，才會依序被選用。
+  \item $k$ 條路徑的最大權（每格只能取一次，共走 $k$ 次）：格子拆點並放兩條平行邊（$1, -val$）與（$k-1, 0$），再連 $S \to$ 起點（$k, 0$）。
+  \item 區間選擇（選帶權區間，每個位置最多被 $k$ 個區間覆蓋）：
+  \begin{itemize}
+    \item 座標離散化後建一條鏈：$i \to i+1$（$k, 0$）。
+    \item 每個區間 $[l, r]$：$l \to r$（$1, -w$）。
+    \item 從鏈頭到鏈尾跑流量 $k$。
+  \end{itemize}
+  \item 資源用完後隔一段時間可再用（餐巾問題類型）：
+  \begin{itemize}
+    \item 按天拆成「用完」與「需要」兩類點。
+    \item $S \to$ 第 $i$ 天用完（用量, $0$）、第 $i$ 天需要 $\to T$（需求, $0$）。
+    \item 買新的：$S \to$ 需要（$\infty$, 買價）
+    \item 快速回收：用完 $i \to$ 需要 $i+a$（$\infty$, 快速費用）
+    \item 慢速回收：用完 $i \to$ 需要 $i+b$（$\infty$, 慢速費用）
+    \item 留到隔天：用完 $i \to$ 用完 $i+1$（$\infty, 0$）
+  \end{itemize}
+  \item 某條邊一定要走：費用設為 $-\text{BIG}$，或改用上下界流。
+\end{itemize}
+
+{\large\bfseries 注意事項\par}
+\medskip
+\begin{itemize}
+  \item Dinic's 算法：時間複雜度 $O(V^2E)$
+  \item MCMF：時間複雜度 $O(FEV)$，其中 $F$ 為最大流量。
+\end{itemize}
+
+{\large\bfseries 建模方式對照表\par}
+\medskip
+\noindent
+\begin{tabular}{@{}p{0.48\linewidth}p{0.47\linewidth}@{}}
+  \hline
+  \textbf{題目關鍵字} & \textbf{建模方式} \\
+  \hline
+  配對、分配、容量上限 & 最大流 \\
+  點不能重複用、點有限制 & 拆點 \\
+  最少代價阻止某事、二選一、依賴關係 & 最小割（$\infty$ 表示不能切） \\
+  配對或運送時帶權重、成本 & MCMF \\
+  費用隨數量遞增 & 拆成平行邊，費用遞增 \\
+  跟時間步有關 & 分層圖 \\
+  至少、必須 & 上下界流 \\
+  \hline
+\end{tabular}
+
+\setlength{\parindent}{0em}
