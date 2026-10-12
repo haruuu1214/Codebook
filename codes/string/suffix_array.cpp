@@ -1,3 +1,6 @@
+// s  = "banana"
+// sa = [5 3 1 0 4 2]
+// rk = [3 2 5 1 4 0]
 const int N = 1e6 + 5;
 int sa[N], tmp[2][N], c[N], rk[N], lcp[N];
 vector<vector<int>> st;
