@@ -6,7 +6,6 @@
 #define pb push_back
 #define all(x) x.begin(), x.end()
 #define sz(x) (int)x.size()
-#define FOR(i, a, b) for(int i = a; i <= b; ++i)
 #define IO ios::sync_with_stdio(0), cin.tie(0)
 using namespace std;
 void debug() { cerr << endl; }
